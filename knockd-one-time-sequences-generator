@@ -1,0 +1,102 @@
+#!/bin/bash
+# Author: Louie Chen <louie23 _at_ lavabit com>
+# License: GPL-3+
+# Description: This script will generate knockd one_time_sequences file
+# This script works with randomize-lines for random number generation.
+
+
+function random() {
+  echo $(seq $1 $2 | rl -c 1)
+}
+
+if ! which rl &>/dev/null
+then
+	echo "Please install rl command"
+	echo "ex: apt-get install randomize-lines"
+	exit 0
+fi
+
+line=10
+port_min=1024
+port_max=65535
+item_min=3
+item_max=7
+udp=1
+
+while [ -n "$1" ]
+do
+	case "$1" in
+		-h)
+			echo "usage: $0 [--no-udp]"
+			echo "-h: this help"
+			echo "-l|--lines: how many lines to generate"
+			echo "-nu|--no-udp: turn off udp"
+			echo "-b|--port-max: the maximum port range"
+			echo "-s|--port-min: the minimum port range"
+			exit 0
+			;;
+		-l|--lines)
+			shift
+			line=$1
+			shift
+			;;
+		-b|--port-max)
+			shift
+			port_max=$1
+			shift
+			;;
+		-s|--port-min)
+			shift
+			port_min=$1
+			shift
+			;;
+		-x|--item-min)
+			shift
+			item_min=$1
+			shift
+			;;
+		-y|--item-max)
+			shift
+			item_max=$1
+			shift
+			;;
+		-nu|--no-udp)
+			shift
+			udp=0
+			;;
+		*)
+			;;
+	esac
+done
+
+count=$line
+
+if [ "$port_max" -le "$port_min" ]
+then
+	echo "--port-max must large than --port-min"
+	exit 0
+fi
+
+while [ $count -gt "0" ]
+do
+	echo -n " $(($line+1-$count))"
+	times=$(random $item_min $item_max)
+
+	for (( i = 1; i < $times; i++ ))
+	do
+		number=$(random $port_min $port_max)
+		echo -n ",$number"
+
+		if [ $udp == 1 ]
+		then
+			tcpORudp=$(random 1 2)
+
+			if [ "$tcpORudp" == 2 ]
+			then
+				echo -n ":udp"
+			fi
+		fi
+	done
+	count=$(($count-1))
+	echo
+done
