@@ -6,7 +6,7 @@
 
 
 function random() {
-  echo $(seq $1 $2 | rl -c 1)
+	echo $(seq $1 $2 | rl -c 1)
 }
 
 if ! which rl &>/dev/null
