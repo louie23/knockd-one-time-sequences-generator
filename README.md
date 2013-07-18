@@ -8,11 +8,17 @@ This script works with rl command for random number generation.
 $ apt-get install randomize-lines
 
 usage:
+
 $ ./knockd-one-time-sequences-generator  -h
+
 -h: this help
+
 -l|--lines: how many lines to generate
+
 -nu|--no-udp: turn off udp
+
 -b|--port-max: the maximum port range
+
 -s|--port-min: the minimum port range
 
 
