@@ -27,12 +27,13 @@ while [ -n "$1" ]
 do
 	case "$1" in
 		-h)
-			echo "usage: $0 [--no-udp]"
 			echo "-h: this help"
 			echo "-l|--lines: how many lines to generate"
 			echo "-nu|--no-udp: turn off udp"
-			echo "-b|--port-max: the maximum port range"
 			echo "-s|--port-min: the minimum port range"
+			echo "-b|--port-max: the maximum port range"
+			echo "-x|--item-min: the minimum item range"
+			echo "-y|--item-max: the maximum item range"
 			exit 0
 			;;
 		-l|--lines)
@@ -40,14 +41,14 @@ do
 			line=$1
 			shift
 			;;
-		-b|--port-max)
-			shift
-			port_max=$1
-			shift
-			;;
 		-s|--port-min)
 			shift
 			port_min=$1
+			shift
+			;;
+		-b|--port-max)
+			shift
+			port_max=$1
 			shift
 			;;
 		-x|--item-min)
@@ -74,6 +75,12 @@ count=$line
 if [ "$port_max" -le "$port_min" ]
 then
 	echo "--port-max must large than --port-min"
+	exit 0
+fi
+
+if [ "$item_max" -le "$item_min" ]
+then
+	echo "--item-max must large than --item-min"
 	exit 0
 fi
 
