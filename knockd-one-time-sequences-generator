@@ -72,13 +72,13 @@ done
 
 count=$line
 
-if [ "$port_max" -le "$port_min" ]
+if [ "$port_max" -lt "$port_min" ]
 then
 	echo "--port-max must large than --port-min"
 	exit 0
 fi
 
-if [ "$item_max" -le "$item_min" ]
+if [ "$item_max" -lt "$item_min" ]
 then
 	echo "--item-max must large than --item-min"
 	exit 0
