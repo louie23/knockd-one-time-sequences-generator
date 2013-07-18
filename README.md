@@ -17,7 +17,8 @@ $ ./knockd-one-time-sequences-generator  -h
 
 
 just run without parameter to use default setting
- ./knockd-one-time-sequences-generator  
+
+$ ./knockd-one-time-sequences-generator  
  1,55956,63051:udp
  2,26814:udp,33941:udp,13157:udp,35731,61827:udp,61048:udp
  3,52658:udp,12884:udp
