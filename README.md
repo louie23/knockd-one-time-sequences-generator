@@ -21,8 +21,11 @@ just run without parameter to use default setting
 
 $ ./knockd-one-time-sequences-generator  
  1,55956,63051:udp
+ 
  2,26814:udp,33941:udp,13157:udp,35731,61827:udp,61048:udp
+ 
  3,52658:udp,12884:udp
+ 
  4,7196,3371:udp
  5,46285:udp,59583:udp,53577,2770:udp
  6,7414:udp,64633,41811
